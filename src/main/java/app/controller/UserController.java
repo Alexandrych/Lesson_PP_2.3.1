@@ -5,36 +5,43 @@ import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     //GET
     @GetMapping
     public String getUsers(Model model) {
         model.addAttribute("usersList", userService.getUsers());
         model.addAttribute("modelUser", new User());
-        System.out.println("get users f5");
         return "users";
     }
 
     //CREATE
     @PostMapping
-    public String create(@ModelAttribute User user) {
+    public String create(@ModelAttribute("modelUser") @Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "users";
+        }
         userService.addUser(user);
-        System.out.println(user + "\nadded");
         return "redirect:/users";
     }
 
     //DELETE
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable("id") int id) {
-        System.out.println("delete " + userService.getUserByID(id));
         userService.deleteUserById(id);
         return "redirect:/users";
     }
@@ -42,16 +49,16 @@ public class UserController {
     //EDIT
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") int id, Model model) {
-        System.out.println("edit get");
         model.addAttribute("user", userService.getUserByID(id));
-        System.out.println(userService.getUserByID(id));
         return "edit";
     }
 
     @PostMapping("/{id}")
-    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
-        System.out.println("edit patch");
-        userService.updateUser(id, user);
+    public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "edit";
+        }
+        userService.updateUser(user);
         return "redirect:/users";
     }
 

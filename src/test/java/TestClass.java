@@ -2,15 +2,18 @@ import app.model.User;
 import app.service.UserService;
 import app.service.UserServiceImpl;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 public class TestClass {
 
     UserService userService = new UserServiceImpl();
 
-//    @Test
-//    public void getUsers() {
-//        System.out.println(userService.getUsers());
-//    }
+    @Test
+    public void getUsers() {
+        System.out.println(userService.getUsers());
+    }
 //
 //    @Test
 //    public void count() {

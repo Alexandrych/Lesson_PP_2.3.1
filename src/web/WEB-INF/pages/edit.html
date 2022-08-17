@@ -14,19 +14,18 @@
 
     <label for="firstName">Имя: </label>
     <input type="text" th:field="*{firstName}" id="firstName"/>
+    <div style="color:red" th:errors="*{firstName}">Name error</div>
     <br>
 
     <label for="secondName">Фамилия: </label>
     <input type="text" th:field="*{secondName}" id="secondName"/>
+    <div style="color:red" th:errors="*{secondName}">Name error</div>
     <br>
 
     <label for="age">Возраст: </label>
     <input type="text" th:field="*{age}" id="age"/>
+    <div style="color:red" th:errors="*{age}">Name error</div>
     <br>
-
-    <!--    <label for="isMarried">В браке: </label>-->
-    <!--    <input type="" th:field="*{isMarried}" id="isMarried"/>-->
-    <!--    <br>-->
 
     <input type="submit" value="Изменить"/>
 </form>

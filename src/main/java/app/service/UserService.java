@@ -10,8 +10,7 @@ public interface UserService {
     int getUsersCount();
     List<User> getUsers();
     void addUser(User user);
-    void updateUser(int id, User user);
-    void deleteUser(User user);
-    void deleteUserById(int i);
-    User getUserByID(int id);
+    void updateUser(User user);
+    void deleteUserById(long i);
+    User getUserByID(long id);
 }

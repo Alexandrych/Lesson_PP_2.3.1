@@ -3,13 +3,17 @@ package app.service;
 import app.dao.UserDao;
 import app.dao.UserDaoJPA;
 import app.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private final UserDao userDao = new UserDaoJPA();
 
     public int getUsersCount() {
@@ -27,20 +31,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(int id, User user) {
-        userDao.updateUser(id, user);
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
 
     @Override
-    public void deleteUser(User user) {
-
-    }
-
-    public void deleteUserById(int i) {
+    public void deleteUserById(long i) {
         userDao.deleteUserById(i);
     }
 
-    public User getUserByID(int id) {
+    @Override
+    public User getUserByID(long id) {
         return userDao.getUserByID(id);
     }
 

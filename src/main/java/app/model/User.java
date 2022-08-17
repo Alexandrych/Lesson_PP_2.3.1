@@ -1,29 +1,30 @@
 package app.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(schema = "users")
+@Table
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
+
+    @NotEmpty(message = "Поле \"имя\" не должно оставаться пустым")
     private String firstName;
-    @Column
+
+    @NotEmpty(message = "Поле \"фамилия\" не должно оставаться пустым")
     private String secondName;
-    @Column
+
+    @Min(value = 0, message = "Возраст не может быть меньше 0")
+    @Max(value = 120, message = "Возраст не может быть больше 120")
     private byte age;
-//    private boolean isMarried;
 
     public User() {
 
-    }
-
-    public User(int id, String firstName, String secondName, byte age) {
-        this(firstName, secondName, age);
-        this.id = id;
     }
 
     public User(String firstName, String secondName, byte age) {
@@ -36,8 +37,8 @@ public class User {
         return id;
     }
 
-    public void setId(int i) {
-        id = i;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -64,21 +65,12 @@ public class User {
         this.age = age;
     }
 
-//    public boolean isMarried() {
-//        return isMarried;
-//    }
-//
-//    public void setMarried(boolean married) {
-//        isMarried = married;
-//    }
-
     @Override
     public String toString() {
         return "ID: " + id +
                 "\nИмя: " + firstName +
                 "\nФамилия: " + secondName +
                 "\nВозраст: " + age +
-//                "\nВ браке: " + (isMarried ? "Да" : "Нет") +
                 "\n\n";
     }
 }

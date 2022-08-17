@@ -53,7 +53,7 @@ public class DatabaseConfig {
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
         entityManagerFactoryBean.setDataSource(dataSource());
-        entityManagerFactoryBean.setPackagesToScan("app.model");
+        entityManagerFactoryBean.setPackagesToScan(env.getProperty("db.entity.package"));
         entityManagerFactoryBean.setJpaProperties(jpaHibernateProperties());
         return entityManagerFactoryBean;
     }

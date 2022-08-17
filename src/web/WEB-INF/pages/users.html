@@ -18,7 +18,6 @@
         <th style="background: #c57948">Имя</th>
         <th style="background: #c57948">Фамилия</th>
         <th style="background: #c57948">Возраст</th>
-        <th>В браке</th>
         <th/><th/>
     </tr>
     <tr th:each="user : ${usersList}">
@@ -26,8 +25,6 @@
         <td th:text="${user.getFirstName()}"></td>
         <td th:text="${user.getSecondName()}"></td>
         <td th:text="${user.getAge()}"></td>
-<!--        <td th:text="${users.isMarried} ? 'Да' : 'Нет'"></td>-->
-        <td th:text="Da"></td>
 
         <td><form th:method="DELETE" th:action="@{/users/{id}/delete(id=${user.getId()})}">
             <input type="submit" value="Удалить"/>
@@ -42,28 +39,27 @@
 <h1>Добавить пользователя:</h1>
 
 <form th:method="POST" th:action="@{/users}" th:object="${modelUser}">
-<div>
+
     <label for="firstName">Имя: </label>
     <input type="text" th:field="*{firstName}" id="firstName"/>
-    <br/>
+    <div style="color:red" th:errors="*{firstName}">Name error</div>
+    <br>
 
     <label for="secondName">Фамилия: </label>
     <input type="text" th:field="*{secondName}" id="secondName"/>
+    <div style="color:red" th:errors="*{secondName}">Name error</div>
     <br>
 
     <label for="age">Возраст: </label>
     <input type="text" th:field="*{age}" id="age"/>
+    <div style="color:red" th:errors="*{age}">Name error</div>
     <br>
 
-<!--    <label for="isMarried">В браке: </label>-->
-<!--    <input type="" th:field="*{isMarried}" id="isMarried"/>-->
-<!--    <br>-->
-
     <input type="submit" value="Добавить"/>
-</div>
+
 </form>
     <hr>
-    <a href="/users">На главную</a>
+    <a th:href="@{/}">На главную</a>
 </font>
 
 </body>
