@@ -13,14 +13,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotEmpty(message = "Поле \"имя\" не должно оставаться пустым")
+    @NotEmpty(message = "РџРѕР»Рµ \"РёРјСЏ\" РЅРµ РґРѕР»Р¶РЅРѕ РѕСЃС‚Р°РІР°С‚СЊСЃСЏ РїСѓСЃС‚С‹Рј")
     private String firstName;
 
-    @NotEmpty(message = "Поле \"фамилия\" не должно оставаться пустым")
+    @NotEmpty(message = "РџРѕР»Рµ \"С„Р°РјРёР»РёСЏ\" РЅРµ РґРѕР»Р¶РЅРѕ РѕСЃС‚Р°РІР°С‚СЊСЃСЏ РїСѓСЃС‚С‹Рј")
     private String secondName;
 
-    @Min(value = 0, message = "Возраст не может быть меньше 0")
-    @Max(value = 120, message = "Возраст не может быть больше 120")
+    @Min(value = 0, message = "Р’РѕР·СЂР°СЃС‚ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РјРµРЅСЊС€Рµ 0")
+    @Max(value = 120, message = "Р’РѕР·СЂР°СЃС‚ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ Р±РѕР»СЊС€Рµ 120")
     private byte age;
 
     public User() {
@@ -68,9 +68,9 @@ public class User {
     @Override
     public String toString() {
         return "ID: " + id +
-                "\nИмя: " + firstName +
-                "\nФамилия: " + secondName +
-                "\nВозраст: " + age +
+                "\nРРјСЏ: " + firstName +
+                "\nР¤Р°РјРёР»РёСЏ: " + secondName +
+                "\nР’РѕР·СЂР°СЃС‚: " + age +
                 "\n\n";
     }
 }

@@ -6,16 +6,22 @@ import app.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private final UserDao userDao = new UserDaoJPA();
+    private final UserDao userDao;
 
+    @Autowired
+    public UserServiceImpl (UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    @Override
     public int getUsersCount() {
         return userDao.getUsersCount();
     }
@@ -26,18 +32,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(User user) {
+    @Transactional
+    public String addUser(User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "users";
+        }
         userDao.addUser(user);
+        return "redirect:/users";
     }
 
     @Override
-    public void updateUser(User user) {
+    @Transactional
+    public String updateUser(User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "edit";
+        }
         userDao.updateUser(user);
+        return "redirect:/users";
     }
 
     @Override
-    public void deleteUserById(long i) {
-        userDao.deleteUserById(i);
+    @Transactional
+    public void deleteUserById(long id) {
+        userDao.deleteUserById(id);
     }
 
     @Override
