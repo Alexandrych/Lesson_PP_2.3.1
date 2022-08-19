@@ -43,7 +43,6 @@ public class UserDaoJPA implements UserDao {
 
     @Override
     public User getUserByID(long id) {
-        return entityManager.createQuery("from User where id = :id", User.class)
-                .setParameter("id", id).getSingleResult();
+        return entityManager.find(User.class, id);
     }
 }
